@@ -1,18 +1,18 @@
 class Image
-  attr_accessor :arryas
+  attr_accessor :arrays
 
   def initialize(arrays)
     @arrays = arrays
   end
 
   def output_image
-  	@arrays.each do |array|
-  	  array.size.times do |i|
-  	    print array[i]
-  	  end
+    @arrays.each do |array|
+      array.size.times do |i|
+        print array[i]
+      end
 
-  	  puts
-  	end
+      puts
+    end
   end
 end
 
