@@ -18,7 +18,7 @@ class Deck
     ranks = %w{Ace 2 3 4 5 6 7 8 9 10 Jack Queen King}
 
     suits.each do |suit|
-      ranks.length.times do |i|
+      ranks.each_index do |i|
         @cards << Card.new(ranks[i], suit)
       end
     end
