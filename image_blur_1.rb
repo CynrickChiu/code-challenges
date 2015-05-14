@@ -7,8 +7,8 @@ class Image
 
   def output_image
     @arrays.each do |array|
-      array.size.times do |i|
-        print array[i]
+      array.each do |element|
+        print element
       end
 
       puts
