@@ -1,13 +1,13 @@
 class Image
-  attr_accessor :arrays
+  attr_accessor :rows
 
-  def initialize(arrays)
-    @arrays = arrays
+  def initialize(rows)
+    self.rows = rows
   end
 
   def output_image
-    @arrays.each do |array|
-      array.each do |element|
+    self.rows.each do |rows|
+      rows.each do |element|
         print element
       end
 
