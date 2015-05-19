@@ -1,4 +1,5 @@
 class Image
+
   attr_accessor :rows
 
   def initialize(rows)
@@ -8,7 +9,7 @@ class Image
   def output_image
     self.rows.each do |row|
       row.each do |element|
-        print element
+        print "#{element} "
       end
 
       puts
@@ -33,26 +34,61 @@ class Image
       row = item[0]
       index = item[1]
       
+      # change pixel to the top
       self.rows[row - 1][index] = 1 unless (row - 1) < 0
+      # change pixel to the bottom
       self.rows[row + 1][index] = 1 unless (row + 1) >= total_rows
+      # change pixel to the left
       self.rows[row][index - 1] = 1 unless (index - 1) < 0
+      # change pixel to the right
       self.rows[row][index + 1] = 1 unless (index + 1) >= total_elements
     end
   end
+
+  def blur_distance(n)
+    until n == 0 do
+      blur
+      n -= 1
+    end
+  end
+
 end
 
-image = Image.new([
+image1 = Image.new([
   [0, 1, 0, 0],
   [0, 0, 0, 0],
   [0, 1, 0, 0],
   [0, 0, 0, 1]
 ])
 
-puts 'Original image:'
-image.output_image
+puts 'Original image #1:'
+image1.output_image
+puts
+image1.blur
+puts 'Image #1 after running blur method:'
+image1.output_image
 
 puts
-image.blur
+puts
 
-puts 'Image after running blur method:'
-image.output_image
+image2 = Image.new([
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 1]
+])
+
+puts 'Original image #2:'
+image2.output_image
+puts
+image2.blur_distance(3)
+puts 'Image #2 after running blur_distance(3):'
+image2.output_image
