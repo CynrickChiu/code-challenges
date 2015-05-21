@@ -24,11 +24,11 @@ class Image
     if distance == 1
       flattened.each_index do |index|
         if flattened[index] == 1
-          flattened[index - 1] = 1
+          flattened[index - 1] = 1 unless (index - 1) < 0
           #puts "flattened[index + 1] is #{flattened[index + 1]}"
-          #flattened[index + 1] = 1
-          flattened[index - elements_per_row] = 1
-          #flattened[index + elements_per_row] = 1
+          #flattened[index + 1] = 1 unless (index + 1) >= flattened.size
+          flattened[index - elements_per_row] = 1 unless (index - elements_per_row) < 0
+          #flattened[index + elements_per_row] = 1 unless (index + elements_per_row) >= flattened.size
         end
       end
 
