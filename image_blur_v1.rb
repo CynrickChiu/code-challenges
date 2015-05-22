@@ -17,31 +17,9 @@ class Image
   end
 
   def blur
-    pixels_indices = []
-    total_rows = self.rows.size         # total number of rows of image
-    total_elements = self.rows[0].size  # total number of elements per row of image
-
     # store indices of every 1s in pixels_indices
-    self.rows.each_with_index do |row, row_index|
-      row.each_with_index do |element, pixel_index|
-        if element == 1
-          pixels_indices << [row_index, pixel_index]
-        end
-      end
-    end
-
-    pixels_indices.each do |item|
-      row = item[0]
-      index = item[1]
-      
-      # change pixel to the top
-      self.rows[row - 1][index] = 1 unless (row - 1) < 0
-      # change pixel to the bottom
-      self.rows[row + 1][index] = 1 unless (row + 1) >= total_rows
-      # change pixel to the left
-      self.rows[row][index - 1] = 1 unless (index - 1) < 0
-      # change pixel to the right
-      self.rows[row][index + 1] = 1 unless (index + 1) >= total_elements
+    rows.each_with_index do |row, row_index|
+      blur_row_by_index(row_index)
     end
   end
 
@@ -49,6 +27,27 @@ class Image
     until n == 0 do
       blur
       n -= 1
+    end
+  end
+
+  private
+
+  def blur_row_by_index(row_index)
+    rows[row_index].each_with_index do |element, pixel_index|
+      blur_pixel(row_index, pixel_index)
+    end
+  end
+
+  def blur_pixel(row_index, pixel_index)
+    if rows[row_index][pixel_index] == 1
+      # change pixel to the top
+      rows[row_index - 1][pixel_index] = 1 unless (row_index - 1) < 0
+      # change pixel to the bottom
+      rows[row_index + 1][pixel_index] = 1 unless (row_index + 1) >= rows.size
+      # change pixel to the left
+      rows[row_index][pixel_index - 1] = 1 unless (pixel_index - 1) < 0
+      # change pixel to the right
+      rows[row_index][pixel_index + 1] = 1 unless (pixel_index + 1) >= rows[0].size
     end
   end
 
