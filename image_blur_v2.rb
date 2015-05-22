@@ -19,29 +19,30 @@ class Image
   def blur(distance)
     elements_per_row = self.rows[0].size
     flattened = self.rows.flatten
+    blurred = flattened.dup
     #puts flattened.inspect
 
     if distance == 1
       flattened.each_index do |index|
         if flattened[index] == 1
           # change pixel to the left
-          flattened[index - 1] = 1 unless (index - 1) < 0
+          blurred[index - 1] = 1 unless (index - 1) < 0
 
           # change pixel to the right
-          #flattened[index + 1] = 1 unless (index + 1) >= flattened.size
+          blurred[index + 1] = 1 unless (index + 1) >= flattened.size
 
           # change pixel to the top
-          flattened[index - elements_per_row] = 1 unless (index - elements_per_row) < 0
+          blurred[index - elements_per_row] = 1 unless (index - elements_per_row) < 0
 
           # change pixel to the bottom
-          #flattened[index + elements_per_row] = 1 unless (index + elements_per_row) >= flattened.size
+          blurred[index + elements_per_row] = 1 unless (index + elements_per_row) >= flattened.size
         end
       end
 
       result = []
 
-      until flattened.empty? do
-        result << flattened.shift(elements_per_row)
+      until blurred.empty? do
+        result << blurred.shift(elements_per_row)
         #puts result.inspect
       end
 
