@@ -19,13 +19,15 @@ class Image
   end
 
   def blur(distance)
-    distance.times do
-      pixels_indices = find_pixels
+    return if distance == 0
 
-      pixels_indices.each do |set|
-        blur_pixel(set[0], set[1])
-      end
+    pixels_indices = find_pixels
+
+    pixels_indices.each do |set|
+      blur_pixel(set[0], set[1])
     end
+    
+    blur(distance - 1)
   end
 
   private
