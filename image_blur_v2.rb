@@ -58,6 +58,7 @@ class Image
 
 end
 
+=begin
 image1 = Image.new([
   [0, 1, 0, 0],
   [0, 0, 0, 0],
@@ -96,3 +97,4 @@ puts
 image2.blur(3)
 puts 'Image #2 after running blur(3):'
 image2.output_image
+=end
