@@ -1,3 +1,5 @@
+# blur version 2
+
 class Image
 
   attr_accessor :rows
@@ -17,51 +19,80 @@ class Image
   end
 
   def blur(distance)
-    elements_per_row = self.rows[0].size
-    flattened = self.rows.flatten
-    #puts flattened.inspect
+    distance.times do
+      pixels_indices = find_pixels
 
-    if distance == 1
-      flattened.each_index do |index|
-        if flattened[index] == 1
-          # change pixel to the left
-          flattened[index - 1] = 1 unless (index - 1) < 0
+      pixels_indices.each do |set|
+        blur_pixel(set[0], set[1])
+      end
+    end
+  end
 
-          # change pixel to the right
-          #flattened[index + 1] = 1 unless (index + 1) >= flattened.size
+  private
 
-          # change pixel to the top
-          flattened[index - elements_per_row] = 1 unless (index - elements_per_row) < 0
+  def find_pixels
+    pixels_indices = []
 
-          # change pixel to the bottom
-          #flattened[index + elements_per_row] = 1 unless (index + elements_per_row) >= flattened.size
+    # store indices of every 1s in pixels_indices
+    self.rows.each_with_index do |row, row_index|
+      row.each_with_index do |element, pixel_index|
+        if element == 1
+          pixels_indices << [row_index, pixel_index]
         end
       end
-
-      result = []
-
-      until flattened.empty? do
-        result << flattened.shift(elements_per_row)
-        #puts result.inspect
-      end
-
-      #puts "result => #{result.inspect}"
-      self.rows = result
     end
+
+    pixels_indices
+  end
+
+  def blur_pixel(row_index, pixel_index)
+    # change pixel to the top
+    rows[row_index - 1][pixel_index] = 1 unless (row_index - 1) < 0
+    # change pixel to the bottom
+    rows[row_index + 1][pixel_index] = 1 unless (row_index + 1) >= rows.size
+    # change pixel to the left
+    rows[row_index][pixel_index - 1] = 1 unless (pixel_index - 1) < 0
+    # change pixel to the right
+    rows[row_index][pixel_index + 1] = 1 unless (pixel_index + 1) >= rows[0].size
   end
 
 end
 
 image1 = Image.new([
-  [0, 0, 0, 0],
+  [0, 1, 0, 0],
   [0, 0, 0, 0],
   [0, 1, 0, 0],
-  [0, 0, 0, 0]
+  [0, 0, 0, 1]
 ])
 
 puts 'Original image #1:'
 image1.output_image
 puts
 image1.blur(1)
-puts 'Image #1 after running blur method:'
+puts 'Image #1 after running blur(1):'
 image1.output_image
+
+puts
+puts
+
+image2 = Image.new([
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 1]
+])
+
+puts 'Original image #2:'
+image2.output_image
+puts
+image2.blur(3)
+puts 'Image #2 after running blur(3):'
+image2.output_image
