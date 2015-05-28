@@ -9,7 +9,7 @@ class Image
   end
 
   def output_image
-    self.rows.each do |row|
+    rows.each do |row|
       row.each do |element|
         print "#{element} "
       end
@@ -36,7 +36,7 @@ class Image
     pixels_indices = []
 
     # store indices of every 1s in pixels_indices
-    self.rows.each_with_index do |row, row_index|
+    rows.each_with_index do |row, row_index|
       row.each_with_index do |element, pixel_index|
         if element == 1
           pixels_indices << [row_index, pixel_index]
