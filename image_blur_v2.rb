@@ -18,15 +18,16 @@ class Image
     end
   end
 
-  def blur(distance)
-    return if distance == 0
-
+  def blur(distance = 1)
     pixels_indices = find_pixels
 
     pixels_indices.each do |set|
       blur_pixel(set[0], set[1])
     end
-    
+  end
+
+  def blur_distance(distance)
+    blur
     blur(distance - 1)
   end
 
@@ -59,44 +60,3 @@ class Image
   end
 
 end
-
-=begin
-image1 = Image.new([
-  [0, 1, 0, 0],
-  [0, 0, 0, 0],
-  [0, 1, 0, 0],
-  [0, 0, 0, 1]
-])
-
-puts 'Original image #1:'
-image1.output_image
-puts
-image1.blur(1)
-puts 'Image #1 after running blur(1):'
-image1.output_image
-
-puts
-puts
-
-image2 = Image.new([
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 1]
-])
-
-puts 'Original image #2:'
-image2.output_image
-puts
-image2.blur(3)
-puts 'Image #2 after running blur(3):'
-image2.output_image
-=end
