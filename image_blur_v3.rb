@@ -19,8 +19,8 @@ class Image
   end
 
   def blur
-    elements_per_row = self.rows[0].size
-    flattened = self.rows.flatten
+    elements_per_row = rows[0].size
+    flattened = rows.flatten
     blurred = flattened.dup
 
     flattened.each_index do |index|
@@ -46,7 +46,7 @@ class Image
     end
 
     self.rows = result
-    self.rows
+    rows
   end
 
   def blur_distance(distance)
@@ -57,44 +57,3 @@ class Image
   end
 
 end
-
-=begin
-image1 = Image.new([
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 1, 0, 0],
-  [0, 0, 0, 0]
-])
-
-puts 'Original image #1:'
-image1.output_image
-puts
-image1.blur
-puts 'Image #1 after running blur method:'
-image1.output_image
-
-puts
-puts
-
-image2 = Image.new([
-  [1, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 1]
-])
-
-puts 'Original image #2:'
-image2.output_image
-puts
-image2.blur_distance(3)
-puts 'Image #2 after running blur_distance(3):'
-image2.output_image
-=end
