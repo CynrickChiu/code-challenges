@@ -14,14 +14,17 @@ class Stack
     @data = nil
   end
 
+  def value
+    @data.value if @data
+  end
+
+  def next_node
+    @data.next_node if @data
+  end
+
   # Push an item onto the stack; takes an argument of class LinkedListNode
   def push(element)
-    if @data.nil?
-      @data = element
-    else
-    	element.next_node = @data
-    	@data = element
-    end
+    @data = LinkedListNode.new(element, @data)
   end
 
   # Pop an item off the stack.  
@@ -29,7 +32,7 @@ class Stack
   # stack and return it to the user
   def pop
     return nil if @data.nil?
-    head_node = @data
+    head_node = @data.value
     @data = @data.next_node
     return head_node
   end
@@ -50,9 +53,9 @@ def reverse_list(list)
   reversed = Stack.new
 
   while list
-  	reversed.push(LinkedListNode.new(list.value))
+  	reversed.push(list.value)
     list = list.next_node
   end
 
-  reversed.data
+  reversed
 end
