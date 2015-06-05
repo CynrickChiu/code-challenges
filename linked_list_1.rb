@@ -22,7 +22,7 @@ class Stack
     @data.next_node if @data
   end
 
-  # Push an item onto the stack; takes an argument of class LinkedListNode
+  # Push an item onto the stack
   def push(element)
     @data = LinkedListNode.new(element, @data)
   end
