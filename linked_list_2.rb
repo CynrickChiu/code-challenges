@@ -17,55 +17,58 @@ def print_values(list_node)
   end
 end
 
+# iterative version
 def reverse_list(list, previous=nil)
-  head = list
-  
-  while head
-    tail = head.next_node
-    head.next_node = previous
+  while list
+    tail = list.next_node
+    list.next_node = previous
 
-    previous = head
-    head = tail
+    previous = list
+    list = tail
   end
 
   previous
 end
 
-# def floyd_detection(list=nil)
-#   return false if list.nil? || list.next_node.nil?
-#   tortoise = list
-#   hare = list.next_node
-
-#   return false if hare.next_node.nil?
-#   hare = hare.next_node
-
-#   while tortoise != hare
-#     tortoise = tortoise.next_node
-
-#     return false if hare.next_node.nil?
-#     hare = hare.next_node
-
-#     return false if hare.next_node.nil?
-#     hare = hare.next_node
-#   end
-
-#   return true
+# recursive version
+# def reverse_list(list, previous=nil)
+#   return previous unless list
+#   next_node = list.next_node
+#   list.next_node = previous
+#   reverse_list(next_node, list)
 # end
 
+# cleaner version of floyd_detection
 def floyd_detection(list=nil)
-  return false if list.nil?
+  increment = Proc.new do |node|
+    return false if node.nil?
+    node.next_node
+  end
+
   hare = list
   tortoise = list
 
   loop do
-    return false if hare.nil?
-    hare = hare.next_node
-
-    return false if hare.nil?
-    hare = hare.next_node
-
-    tortoise = tortoise.next_node
-
+    hare = increment.call(increment.call(hare))
+    tortoise = increment.call(tortoise)
     return true if hare == tortoise
   end
 end
+
+# def floyd_detection(list=nil)
+#   return false if list.nil?
+#   hare = list
+#   tortoise = list
+
+#   loop do
+#     return false if hare.nil?
+#     hare = hare.next_node
+
+#     return false if hare.nil?
+#     hare = hare.next_node
+
+#     tortoise = tortoise.next_node
+
+#     return true if hare == tortoise
+#   end
+# end
