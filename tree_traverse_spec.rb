@@ -1,3 +1,4 @@
+require 'rspec'
 require_relative 'tree_traverse'
 
 describe "depth first search and breadth first search" do
@@ -58,7 +59,7 @@ describe "depth first search and breadth first search" do
     end
 
     context "when a node matches the search_value" do
-      let(:result) { bfs(@trunk, 9)}
+      let(:result) { bfs(@trunk, 9) }
       it "returns the node matching the search_value" do
         expect(result).to eq(@ninth_node)
       end

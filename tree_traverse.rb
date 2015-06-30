@@ -7,17 +7,25 @@ class Tree
   end
 end
 
+# def dfs_recursive(node, search_value)
+#   return node if node.payload == search_value
+  
+#   node.children.each do |child|
+#     # puts "child: #{child.inspect}"
+#     search = dfs_recursive(child, search_value)
+#     # puts "search: #{search.inspect}"
+#     return search unless search.nil?
+#   end
+
+#   return nil
+# end
+
 def dfs_recursive(node, search_value)
   return node if node.payload == search_value
-  
-  node.children.each do |child|
-  	# puts "child: #{child.inspect}"
-    search = dfs_recursive(child, search_value)
-    # puts "search: #{search.inspect}"
-    return search unless search.nil?
-  end
 
-  return nil
+  node.children.inject(nil) do |result, child|
+    result ||= dfs_recursive(child, search_value)
+  end
 end
 
 def dfs_iterative(node, search_value)

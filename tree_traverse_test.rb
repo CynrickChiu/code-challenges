@@ -19,32 +19,26 @@ class TreeTraverse < Minitest::Test
   end
 
   def test_dfs_recursive_node_not_found
-    result = dfs_recursive(@trunk, 3)
-    assert_equal nil, result
+    assert_equal nil, dfs_recursive(@trunk, 3)
   end
 
   def test_dfs_recursive_node_found
-    result = dfs_recursive(@trunk, 11)
-    assert_equal @eleventh_node, result
+    assert_equal @eleventh_node, dfs_recursive(@trunk, 11)
   end
 
   def test_dfs_iterative_node_not_found
-    result = dfs_iterative(@trunk, 13)
-    assert_equal nil, result
+    assert_equal nil, dfs_iterative(@trunk, 13)
   end
 
   def test_dfs_iterative_node_found
-    result = dfs_iterative(@trunk, 4)
-    assert_equal @fourth_node, result
+    assert_equal @fourth_node, dfs_iterative(@trunk, 4)
   end
 
   def test_bfs_node_not_found
-    result = bfs(@trunk, 17)
-    assert_equal nil, result
+    assert_equal nil, bfs(@trunk, 17)
   end
 
   def test_bfs_node_found
-    result = bfs(@trunk, 5)
-    assert_equal @fifth_node, result
+    assert_equal @fifth_node, bfs(@trunk, 5)
   end
 end
