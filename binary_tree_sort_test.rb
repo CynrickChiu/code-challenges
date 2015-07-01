@@ -7,7 +7,7 @@ class BinaryTreeSort < Minitest::Test
     @sixth = BinaryTree.new(6, nil, nil)
     @fourth = BinaryTree.new(4, @first, @sixth)
     @tenth = BinaryTree.new(10, nil, nil)
-  	@fourteenth = BinaryTree.new(14, @tenth, nil)
+    @fourteenth = BinaryTree.new(14, @tenth, nil)
     @ninth = BinaryTree.new(9, nil, @fourteenth)
     @tree = BinaryTree.new(7, @fourth, @ninth)
   end

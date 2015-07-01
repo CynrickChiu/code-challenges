@@ -9,7 +9,7 @@ describe BinaryTree do
     let(:sixth) { BinaryTree.new(6, nil, nil) }
     let(:fourth) { BinaryTree.new(4, first, sixth) }
     let(:tenth) { BinaryTree.new(10, nil, nil) }
-  	let(:fourteenth) { BinaryTree.new(14, tenth, nil) }
+    let(:fourteenth) { BinaryTree.new(14, tenth, nil) }
     let(:ninth) { BinaryTree.new(9, nil, fourteenth) }
     let(:tree) { BinaryTree.new(7, fourth, ninth) }
 
