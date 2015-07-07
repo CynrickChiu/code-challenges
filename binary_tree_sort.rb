@@ -8,9 +8,13 @@ class BinaryTree
     @right = right
   end
 
+  def ==(other)
+    payload == other.payload && left == other.left && right == other.right
+  end
+
   def build_binary_tree(list)
     list.each do |item|
-      add_node(item, self)
+      add_node(item)
     end
 
     return self
@@ -19,36 +23,34 @@ class BinaryTree
   def binary_tree_sort
     result = []
 
-    if !self.left.nil?
-      result << self.left.binary_tree_sort
+    unless left.nil?
+      result << left.binary_tree_sort
     end
 
-    result << self.payload
+    result << payload
 
-    if !self.right.nil?
-      result << self.right.binary_tree_sort
+    unless right.nil?
+      result << right.binary_tree_sort
     end
     
     result.flatten
   end
 
-  private
-
-  def add_node(item, node)
-    if node.payload.nil?
-      node.payload = item
+  def add_node(item)
+    if payload.nil?
+      self.payload = item
     else
-      if item < node.payload
-        if !node.left.nil?
-          add_node(item, node.left)
+      if item < payload
+        if left.nil?
+          self.left = BinaryTree.new(item, nil, nil)
         else
-          node.left = BinaryTree.new(item, nil, nil)
+          left.add_node(item)
         end
       else
-        if !node.right.nil?
-          add_node(item, node.right)
+        if right.nil?
+          self.right = BinaryTree.new(item, nil, nil)
         else
-          node.right = BinaryTree.new(item, nil, nil)
+          right.add_node(item)
         end
       end
     end
