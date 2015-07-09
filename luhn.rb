@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require_relative 'fixnum'
 
 module Luhn
   def self.is_valid?(number)
