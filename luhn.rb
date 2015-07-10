@@ -1,19 +1,20 @@
 require 'minitest/autorun'
+require_relative 'fixnum'
 
 module Luhn
   def self.is_valid?(number)
-    numbers_array = number.to_s.split("").map { |number| number.to_i }
-    
-    numbers_array = numbers_array.map.with_index do |number, index|
-      if index % 2 == 0
-        number + number >= 10 ? number + number - 9 : number + number
-      else
-        number
+    numbers_array = number.digits.reverse
+
+    numbers_array.map!.with_index do |number, index|
+      if index % 2 == 1
+        number += number
+        number -= 9 if number >= 10
       end
+      number
     end
-    
+
     sum = numbers_array.reduce(:+)
-    
+
     sum % 10 == 0 ? true : false
   end
 end
