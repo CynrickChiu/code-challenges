@@ -2,35 +2,11 @@ def collatz_iterative(n)
   counter = 1
 
   until n == 1
-    # original version
-    # if n % 2 == 0
-    #   n = n / 2
-    #   puts n
-    #   next
-    # end
-
-    # n = 3 * n + 1 if n % 2 == 1
-
-    # refactored version
-    n % 2 == 0 ? n = n / 2 : n = 3 * n + 1
+    n = n % 2 == 0 ? n / 2 : 3 * n + 1
     counter += 1
   end
 
   counter
-end
-
-def longest_collatz_sequence_iterative
-  result_number = 1
-  longest_sequence = 1
-
-  (1..1000000).each do |n|
-    if collatz_iterative(n) > longest_sequence
-      result_number = n
-      longest_sequence = collatz_iterative(n)
-    end
-  end
-
-  result_number
 end
 
 def collatz_recursive(n)
@@ -41,16 +17,24 @@ def collatz_recursive(n)
   end
 end
 
-def longest_collatz_sequence_recursive
+def longest_collatz_sequence(func)
   result_number = 1
   longest_sequence = 1
 
   (1..1000000).each do |n|
-    if collatz_recursive(n) > longest_sequence
+    if func.call(n) > longest_sequence
       result_number = n
-      longest_sequence = collatz_recursive(n)
+      longest_sequence = func.call(n)
     end
   end
 
   result_number
+end
+
+def longest_collatz_sequence_iterative
+  longest_collatz_sequence(method(:collatz_iterative))
+end
+
+def longest_collatz_sequence_recursive
+  longest_collatz_sequence(method(:collatz_recursive))
 end
