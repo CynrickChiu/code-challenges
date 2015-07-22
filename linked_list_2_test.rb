@@ -22,8 +22,8 @@ class TestLinkedList < Minitest::Test
   end
 
   def test_reverse_list_3_nodes
-  	reversed = reverse_list(@node3)
-  	assert_output("37 --> 99 --> 12 --> nil\n") { print_values(reversed) }
+    reversed = reverse_list(@node3)
+    assert_output("37 --> 99 --> 12 --> nil\n") { print_values(reversed) }
   end
 
   def test_floyd_nil_list

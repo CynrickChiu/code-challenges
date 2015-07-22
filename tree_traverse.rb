@@ -35,7 +35,7 @@ def dfs_iterative(node, search_value)
     if stack[0].payload == search_value
       return stack[0]
     else
-    	temp = stack.shift
+      temp = stack.shift
 
       temp.children.reverse.each do |child|
         stack.unshift(child)

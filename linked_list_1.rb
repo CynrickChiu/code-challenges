@@ -53,7 +53,7 @@ def reverse_list(list)
   reversed = Stack.new
 
   while list
-  	reversed.push(list.value)
+    reversed.push(list.value)
     list = list.next_node
   end
 

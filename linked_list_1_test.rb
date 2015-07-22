@@ -21,7 +21,7 @@ class TestLinkedList < Minitest::Test
   end
 
   def test_print_values
-  	@node1 = LinkedListNode.new(37)
+    @node1 = LinkedListNode.new(37)
     @node2 = LinkedListNode.new(99, @node1)
     @node3 = LinkedListNode.new(12, @node2)
     assert_output("12 --> 99 --> 37 --> nil\n") { print_values(@node3) }
@@ -34,7 +34,7 @@ class TestLinkedList < Minitest::Test
   end
 
   def test_reverse_list
-  	@node1 = LinkedListNode.new(37)
+    @node1 = LinkedListNode.new(37)
     @node2 = LinkedListNode.new(99, @node1)
     @node3 = LinkedListNode.new(12, @node2)
     reversed = reverse_list(@node3)

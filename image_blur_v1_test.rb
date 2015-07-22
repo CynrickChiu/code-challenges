@@ -16,7 +16,7 @@ class TestImageBlur < Minitest::Test
   end
 
   def test_blur_with_pixel_change
-  	@image1.blur
+    @image1.blur
     assert_equal [[1, 1, 1, 0], [0, 1, 0, 0], [1, 1, 1, 1], [0, 1, 1, 1]], @image1.rows
   end
 
